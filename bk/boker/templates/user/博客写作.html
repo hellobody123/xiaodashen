@@ -1,0 +1,59 @@
+{% extends 'user/首页.html' %}
+{% load staticfiles %}
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>{% block title %}博客写作{% endblock title %}</title>
+    {% block link %}
+    <link rel="stylesheet" href="{%static 'css/amazeui.min.css'%}">
+    <link rel="stylesheet" href="{%static 'css/write.css'%}">
+    <style>
+        body{
+           padding-top: 0px;
+        }
+    </style>
+    {% endblock link %}
+</head>
+<body>
+{% block header %}{% endblock header %}
+{% block div %}
+<div class="layout">
+    <div class="side-left am-text-center am-padding-lg">
+        <div class="">
+            <a class="am-btn am-btn-danger am-round am-text-lg" style="width: 100%;" href="/">回首页</a>
+        </div>
+        <div class="am-text-left am-padding-vertical">
+            <div class="am-round am-text-md am-icon-plus" style="color: #fff;font-weight: 700;"> 新建文集</div>
+        </div>
+    </div>
+    <div class="list-center am-text-center am-padding-lg">
+        <div class="am-text-left">
+            <div class="am-round am-text-md am-icon-plus" style="color: #000;font-weight: 700;"> 新建文章</div>
+        </div>
+    </div>
+    <div class="editor-right">
+        <div class="editor-top am-margin-lg">
+            <div class="am-input-group">
+                <input type="text" class="article-title">
+                <span class="am-input-group-btn">
+                    <button class="am-btn am-btn-danger am-round am-icon-plus" type="button" style="border: none;"> 发布文章</button>
+                </span>
+            </div>
+        </div>
+        <div class="editor-toolbar"></div>
+        <div class="editor-text"> <!--可使用 min-height 实现编辑区域自动增加高度-->
+            <p>请输入内容</p>
+        </div>
+    </div>
+</div>
+{% endblock div %}
+{% block footer %}{% endblock footer %}
+<script src="{%static 'js/wangEditor.min.js'%}"></script>
+<script type="text/javascript">
+    let E = window.wangEditor
+    let editor = new E('.editor-toolbar', '.editor-text')
+    editor.create()
+</script>
+</body>
+</html>

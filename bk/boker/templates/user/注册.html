@@ -1,0 +1,96 @@
+<!doctype html>
+<html class="no-js">
+
+<head>
+    {% load staticfiles %}
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="description" content="">
+    <meta name="keywords" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    
+    <title>注册</title>
+    <link rel="icon" type="image/png" href="favicon.png">
+    <link rel="stylesheet" href="{% static '/css/amazeui.min.css' %}">
+    <link rel="stylesheet" href="{% static '/css/app.css' %}">
+    
+    <style>
+        body {
+            padding: 0 !important;
+            background-image: url("{% static '/img/bg.jpg' %}");
+            background-size: cover;
+        }
+
+        .form-layout {
+            display: flex;
+            width: 100vw;
+            height: 100vh;
+            align-items: center;
+            justify-content: center;
+        }
+    </style>
+
+</head>
+
+<body style="padding-top: 70px;">
+
+
+
+    <div class="am-g form-layout">
+        <div class="am-u-md-4 am-u-md-centered">
+            <form class="am-form am-padding" action="{% url 'register' %}" method="post" style="background: #fff; box-shadow: 0 0 10px #000;">
+
+                <input type='hidden' name='csrfmiddlewaretoken' value='3hiGc8dzDOWrrmNcoJ7PtLhbqdeenSEb1zBcnBKVC5TOGK5gZPKwHwFddhMBsAcu' />
+                {% csrf_token %}
+                <fieldset>
+                    <legend>创建您的账号 <a class="am-align-right" href="/user">返回首页</a></legend>
+                    <div class="am-form-group">
+                        <label for="username">用户名</label>
+                        <input type="text" name="username" placeholder="输入用户名">
+                    </div>
+                    <div class="am-form-group">
+                        <label for="email">邮箱</label>
+                        <input type="email" name="email" placeholder="输入电子邮箱">
+                    </div>
+                    <div class="am-form-group">
+                        <label for="password">密码</label>
+                        <input type="password" name="password" placeholder="设置个密码吧">
+                    </div>
+                    <div class="am-checkbox">
+                        <label>
+                            <input type="checkbox" checked> 同意本网站使用协议
+                        </label>
+                        <label class="am-align-right">
+                            已有账号? <a href="/user/d/">登录</a>
+                        </label>
+                    </div>
+                    <p>
+                        <button type="submit" class="am-btn am-btn-block am-btn-success">注册</button>
+                    </p>
+                </fieldset>
+            </form>
+        </div>
+    </div>
+
+
+
+
+
+<script src="static/js/jquery-3.3.1.js"></script>
+<script src="static/js/amazeui.min.js"></script>
+<script>
+    $(function () {
+        $(window).scroll(function () {
+            if($(this).scrollTop() < 300) {
+                $('#gotop').hide()
+            } else {
+                $('#gotop').show()
+            }
+        })
+    })
+</script>
+
+</body>
+
+</html>
+

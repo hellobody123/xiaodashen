@@ -1,0 +1,109 @@
+<!doctype html>
+<html class="no-js">
+
+<head>
+    {% load staticfiles %}
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="description" content="">
+    <meta name="keywords" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    
+    <title>登录</title>
+    <link rel="icon" type="image/png" href="favicon.png">
+    <link rel="stylesheet" href="{% static '/css/amazeui.min.css' %}">
+    <link rel="stylesheet" href="{% static '/css/app.css' %}">
+    
+    <style>
+        body {
+            padding: 0 !important;
+            background-image: url("{% static '/img/bg.jpg' %}");
+            background-size: cover;
+        }
+
+        .form-layout {
+            display: flex;
+            width: 100vw;
+            height: 100vh;
+            align-items: center;
+            justify-content: center;
+        }
+    </style>
+
+</head>
+
+<body style="padding-top: 70px;">
+
+
+
+    <div class="am-g form-layout">
+        <div class="am-u-md-4 am-u-md-centered ">
+            <form class="am-form am-padding" action="{% url 'log_in' %}"    id='form_log_in' method="post"  style="background: #fff; box-shadow: 0 0 10px #000;">
+
+                <input type='hidden' name='next' id="next" value='{{ next }}' />
+                {% csrf_token %}
+                <fieldset>
+                    <legend>欢迎登录<a class="am-align-right" href="/user">返回首页</a></legend>
+                    <div class="am-form-group">
+                        <label for="username">用户名</label>
+                        <input type="text" name="username" placeholder="输入用户名">
+                    </div>
+                    <div class="am-form-group">
+                        <label for="password">密码</label>
+                        <input type="password" name="password" placeholder="输入密码">
+                    </div>
+                    <div class="am-checkbox">
+                        <label>
+                            <input type="checkbox" name="remember" checked> 记住我
+                        </label>
+                        <label class="am-align-right">
+                            没有账号? <a href="/user/z/">注册</a>
+                        </label>
+                    </div>
+                    <p>
+                        <button id="#form_login" type="submit" class="am-btn am-btn-block am-btn-success">登录</button>
+                    </p>
+                </fieldset>
+            </form>
+        </div>
+    </div>
+
+
+
+
+
+
+<script src="{% static '/js/jquery-3.3.1.js' %}"></script>
+<script src="{% static '/js/amazeui.min.js' %}"></script>
+<script>
+
+     $(function () {
+             {#绑定表单的提交事件，在该事件中执行异步请求，并阻止表单默认的提交事件操作 #}
+            $('#form_log_in').submit(function () {
+                $.ajax({
+                    url: "{% url 'log_in' %}",
+                    type: "POST",
+                    data: $("#form_log_in").serialize(),
+                    success: function (data) {
+                        if(data == '成功') {
+                            if($('#next').val()){
+                                location.href = $('#next').val()
+                            } else {
+                                location.href = '{% url 'index' %}'
+                            }
+                        } else {
+                            alert(data)
+                        }
+                    }
+                })
+                return false // 阻止表单自己执行默认提交操作
+            })
+        })
+
+</script>
+
+
+
+</body>
+
+</html>
